@@ -14,4 +14,6 @@
     {% else %}
         <h1>Пока не создано ни одной компании</h1>
     {% endif %}
+    <br>
+    <a href="{% url 'company_create' %}">Добавить компанию</a>
 {% endblock %}

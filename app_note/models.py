@@ -34,6 +34,7 @@ class ContactsModel(models.Model):
 
     class Meta:
         db_table = 'contacts'
+        ordering = ['contact_type']
 
 
 class ContactsTypeModel(models.Model):

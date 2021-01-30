@@ -14,4 +14,6 @@
             {% endfor %}
         </ui>
     {% endif %}
+    <br>
+    <a href="{% url 'employee_create' company.id %}">Добавить Сотрудника</a>
 {% endblock %}

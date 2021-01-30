@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
 
-from .forms import EmployeesForm, ContactsForm
+from .forms import EmployeesForm, ContactsForm, CompaniesForm
 from .models import CompaniesModel, EmployeesModel, ContactsModel
 
 
@@ -56,3 +56,46 @@ class EmployeeContactEditView(View):
             contact.save()
             return HttpResponseRedirect(
                 reverse('employee', kwargs={'company_id': company_id, 'employee_id': employee_id}))
+
+
+class EmployeeContactCreateView(View):
+    def get(self, request, company_id, employee_id):
+        contact_form = ContactsForm()
+        return render(request, 'app_note/employee_contact_create.html',
+                      context={'contact_form': contact_form})
+
+    def post(self, request, company_id, employee_id):
+        contact_form = ContactsForm(request.POST)
+        if contact_form.is_valid():
+            ContactsModel.objects.create(**contact_form.cleaned_data,
+                                         employee=EmployeesModel.objects.get(id=employee_id))
+        return HttpResponseRedirect(
+            reverse('employee', kwargs={'company_id': company_id, 'employee_id': employee_id}))
+
+
+class CompanyCreateView(View):
+    def get(self, request):
+        company_form = CompaniesForm()
+        return render(request, 'app_note/company_create.html',
+                      context={'company_form': company_form})
+
+    def post(self, request):
+        company_form = CompaniesForm(request.POST)
+        if company_form.is_valid():
+            CompaniesModel.objects.create(**company_form.cleaned_data)
+        return HttpResponseRedirect(
+            reverse('companies'))
+
+
+class EmployeeCreateView(View):
+    def get(self, request, company_id):
+        employee_form = EmployeesForm()
+        return render(request, 'app_note/employee_create.html',
+                      context={'employee_form': employee_form})
+
+    def post(self, request, company_id):
+        employee_form = EmployeesForm(request.POST)
+        if employee_form.is_valid():
+            EmployeesModel.objects.create(**employee_form.cleaned_data, company=CompaniesModel.objects.get(id=company_id))
+        return HttpResponseRedirect(
+            reverse('company_detail', kwargs={'company_id': company_id}))

@@ -5,7 +5,7 @@ from .models import EmployeesModel, ContactsModel, CompaniesModel
 class EmployeesForm(ModelForm):
     class Meta:
         model = EmployeesModel
-        fields = '__all__'
+        fields = ['last_name', 'first_name', 'middle_name']
 
 
 class ContactsForm(ModelForm):
