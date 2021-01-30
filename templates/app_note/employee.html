@@ -1,0 +1,12 @@
+{%  extends 'base.html' %}
+{% block title %}
+    {{ employee }}
+{% endblock %}
+{% block content %}
+    {{ employee }}
+    {{ employee.middle_name }}
+    {% for contact in employee.contacts.all %}
+        <p>{{ contact.contact_type }}: {{ contact.data }}</p>
+    {% endfor %}
+    <a href="{% url 'employee_edit' employee.company.id employee.id %}">Редактировать</a>
+{% endblock %}

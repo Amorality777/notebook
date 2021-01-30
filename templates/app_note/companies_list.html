@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}
+    Компании
+{% endblock %}
+
+{% block content %}
+    {% if companies_list %}
+        {% for company in companies_list %}
+            <li><a href="{% url 'company_detail' company.id %}"> {{ company.title }}</a></li>
+        {% endfor %}
+    {% else %}
+        <h1>Пока не создано ни одной компании</h1>
+    {% endif %}
+{% endblock %}
