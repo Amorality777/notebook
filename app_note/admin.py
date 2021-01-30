@@ -6,6 +6,10 @@ class EmployeesInLine(admin.TabularInline):
     model = EmployeesModel
 
 
+class ContactsInLine(admin.TabularInline):
+    model = ContactsModel
+
+
 @admin.register(CompaniesModel)
 class CompaniesAdmin(admin.ModelAdmin):
     inlines = [EmployeesInLine]
@@ -14,6 +18,7 @@ class CompaniesAdmin(admin.ModelAdmin):
 @admin.register(EmployeesModel)
 class EmployeesAdmin(admin.ModelAdmin):
     list_display = ('get_full_name', 'company')
+    inlines = [ContactsInLine]
 
     def get_full_name(self, obj):
         if obj.middle_name is not None:
