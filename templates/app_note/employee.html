@@ -3,7 +3,7 @@
     {{ employee }}
 {% endblock %}
 {% block content %}
-    <h3>
+    <h3>ФИО:
         {% if employee.middle_name %}
             {{ employee.last_name }}
             {{ employee.first_name }}
@@ -12,10 +12,15 @@
             {{ employee }}
         {% endif %}
     </h3>
+    <h3>Компания: {{ employee.company }}</h3>
+
+    <a href="{% url 'employee_edit' employee.company.id employee.id %}">Редактировать основную информацию</a><br><br>
     {% if employee.contacts.all %}
         <ui>
             {% for contact in employee.contacts.all %}
-                <li>{{ contact.contact_type }}: {{ contact.data }}</li>
+                <li>{{ contact.contact_type }}: {{ contact.data }} <a
+                        href="{% url 'employee_contact_edit' employee.company.id employee.id contact.id %}">
+                    изменить</a></li>
             {% endfor %}
         </ui>
     {% else %}
