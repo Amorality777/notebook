@@ -96,6 +96,21 @@ class EmployeeCreateView(View):
     def post(self, request, company_id):
         employee_form = EmployeesForm(request.POST)
         if employee_form.is_valid():
-            EmployeesModel.objects.create(**employee_form.cleaned_data, company=CompaniesModel.objects.get(id=company_id))
+            EmployeesModel.objects.create(**employee_form.cleaned_data,
+                                          company=CompaniesModel.objects.get(id=company_id))
         return HttpResponseRedirect(
             reverse('company_detail', kwargs={'company_id': company_id}))
+
+
+class EmployeeDeleteView(View):
+    def get(self, request, employee_id):
+        employee = EmployeesModel.objects.get(id=employee_id)
+        employee.delete()
+        return HttpResponseRedirect(reverse('companies'))
+
+
+class ContactDeleteView(View):
+    def get(self, request, contact_id):
+        contact = ContactsModel.objects.get(id=contact_id)
+        contact.delete()
+        return HttpResponseRedirect(reverse('companies'))

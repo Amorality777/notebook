@@ -21,11 +21,13 @@
                 <li>{{ contact.contact_type }}: {{ contact.data }} <a
                         href="{% url 'employee_contact_edit' employee.company.id employee.id contact.id %}">
                     изменить</a></li>
+                <a href="{% url 'delete_contact' contact.id %}">Удалить способ связи</a><br>
             {% endfor %}
         </ui>
     {% else %}
         <p>Пока нет ни одного способа связаться</p>
     {% endif %}
     <br>
-    <a href="{% url 'employee_contact_create' employee.company.id employee.id %}">Добавить способ связи</a>
+    <a href="{% url 'employee_contact_create' employee.company.id employee.id %}">Добавить способ связи</a><br>
+    <a href="{% url 'delete_employee' employee.id %}">Удалить сотрудника из контактов</a>
 {% endblock %}

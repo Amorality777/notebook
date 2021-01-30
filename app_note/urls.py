@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import CompaniesView, CompanyDetailView, EmployeeView,EmployeeCreateView, EmployeeEditView, EmployeeContactEditView, \
-    EmployeeContactCreateView, CompanyCreateView
+from .views import CompaniesView, CompanyDetailView, EmployeeView, EmployeeCreateView, EmployeeEditView, \
+    EmployeeContactEditView, \
+    EmployeeContactCreateView, CompanyCreateView, EmployeeDeleteView, ContactDeleteView
 
 urlpatterns = [
     path('', CompaniesView.as_view(), name='companies'),
@@ -13,5 +14,6 @@ urlpatterns = [
          name='employee_contact_edit'),
     path('<str:company_id>/<int:employee_id>/create_new_contact', EmployeeContactCreateView.as_view(),
          name='employee_contact_create'),
-
+    path('delete_employee/<int:employee_id>', EmployeeDeleteView.as_view(), name='delete_employee'),
+    path('delete_contact/<int:contact_id>', ContactDeleteView.as_view(), name='delete_contact'),
 ]
