@@ -1,11 +1,24 @@
-{%  extends 'base.html' %}
+{% extends 'base.html' %}
 {% block title %}
     {{ employee }}
 {% endblock %}
 {% block content %}
-    {{ employee }}
-    {{ employee.middle_name }}
-    {% for contact in employee.contacts.all %}
-        <p>{{ contact.contact_type }}: {{ contact.data }}</p>
-    {% endfor %}
+    <h3>
+        {% if employee.middle_name %}
+            {{ employee.last_name }}
+            {{ employee.first_name }}
+            {{ employee.middle_name }}
+        {% else %}
+            {{ employee }}
+        {% endif %}
+    </h3>
+    {% if employee.contacts.all %}
+        <ui>
+            {% for contact in employee.contacts.all %}
+                <li>{{ contact.contact_type }}: {{ contact.data }}</li>
+            {% endfor %}
+        </ui>
+    {% else %}
+        <p>Пока нет ни одного способа связаться</p>
+    {% endif %}
 {% endblock %}

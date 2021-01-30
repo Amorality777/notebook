@@ -5,9 +5,13 @@
 {% block content %}
     <h1>Компания: {{ company }}</h1>
     <h2>Список сотрудников:</h2>
-    {% if company %}
-        {% for employee in company.employees.all %}
-            <a href="{% url 'employee' company.id employee.id %}">{{ employee.first_name }} {{ employee.last_name }}</a><br>
-        {% endfor %}
+    {% if company.employees.all %}
+        <ui>
+            {% for employee in company.employees.all %}
+                <li>
+                    <a href="{% url 'employee' company.id employee.id %}">{{ employee.first_name }} {{ employee.last_name }}</a><br>
+                </li>
+            {% endfor %}
+        </ui>
     {% endif %}
 {% endblock %}
