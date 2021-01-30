@@ -14,7 +14,7 @@ class CompaniesModel(models.Model):
 class EmployeesModel(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25)
-    middle_name = models.CharField(max_length=25, default=None, null=True)
+    middle_name = models.CharField(max_length=25, default=None, null=True, blank=True)
     company = models.ForeignKey('CompaniesModel', on_delete=models.CASCADE, related_name='employees')
 
     def __str__(self):

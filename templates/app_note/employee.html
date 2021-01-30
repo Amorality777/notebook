@@ -8,5 +8,4 @@
     {% for contact in employee.contacts.all %}
         <p>{{ contact.contact_type }}: {{ contact.data }}</p>
     {% endfor %}
-    <a href="{% url 'employee_edit' employee.company.id employee.id %}">Редактировать</a>
 {% endblock %}
