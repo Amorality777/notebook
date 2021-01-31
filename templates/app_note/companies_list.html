@@ -6,11 +6,11 @@
 {% block content %}
     <h1>Список компаний</h1>
     {% if companies_list %}
-        <ui>
+        <ul>
             {% for company in companies_list %}
                 <li><a href="{% url 'company_detail' company.id %}"> {{ company.title }}</a></li>
             {% endfor %}
-        </ui>
+        </ul>
     {% else %}
         <h1>Пока не создано ни одной компании</h1>
     {% endif %}

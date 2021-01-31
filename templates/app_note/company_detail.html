@@ -6,13 +6,13 @@
     <h1>Компания: {{ company }}</h1>
     <h2>Список сотрудников:</h2>
     {% if company.employees.all %}
-        <ui>
+        <ul>
             {% for employee in company.employees.all %}
                 <li>
                     <a href="{% url 'employee' company.id employee.id %}">{{ employee.first_name }} {{ employee.last_name }}</a><br>
                 </li>
             {% endfor %}
-        </ui>
+        </ul>
     {% endif %}
     <br>
     <a href="{% url 'employee_create' company.id %}">Добавить Сотрудника</a><br>

@@ -102,15 +102,15 @@ class EmployeeCreateView(View):
             reverse('company_detail', kwargs={'company_id': company_id}))
 
 
-class EmployeeDeleteView(View):
-    def get(self, request, employee_id):
-        employee = EmployeesModel.objects.get(id=employee_id)
-        employee.delete()
-        return HttpResponseRedirect(reverse('companies'))
+def _abstract_delete(request, info_id, model):
+    info = model.objects.get(id=info_id)
+    info.delete()
+    return HttpResponseRedirect(reverse('companies'))
 
 
-class ContactDeleteView(View):
-    def get(self, request, contact_id):
-        contact = ContactsModel.objects.get(id=contact_id)
-        contact.delete()
-        return HttpResponseRedirect(reverse('companies'))
+def employee_delete_view(request, employee_id):
+    return _abstract_delete(request, employee_id, EmployeesModel)
+
+
+def contact_delete_view(request, contact_id):
+    return _abstract_delete(request, contact_id, ContactsModel)
