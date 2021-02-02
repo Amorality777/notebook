@@ -6,14 +6,13 @@
     <h1>Компания: {{ company }}</h1>
     <h2>Список сотрудников:</h2>
     {% if company.employees.all %}
-        <ul>
+        <div class="list-group">
             {% for employee in company.employees.all %}
-                <li>
-                    <a href="{% url 'employee' company.id employee.id %}">{{ employee.first_name }} {{ employee.last_name }}</a><br>
-                </li>
+                <a href="{% url 'employee' company.id employee.id %}" class="list-group-item list-group-item-action">{{ employee.first_name }} {{ employee.last_name }}</a>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
     <br>
-    <a href="{% url 'employee_create' company.id %}">Добавить Сотрудника</a><br>
+    <a class="btn btn-secondary link-light btn-sm" href="{% url 'employee_create' company.id %}" role="button">Добавить Сотрудника</a>
+    <br>
 {% endblock %}

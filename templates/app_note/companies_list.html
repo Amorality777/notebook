@@ -6,14 +6,12 @@
 {% block content %}
     <h1>Список компаний</h1>
     {% if companies_list %}
-        <ul>
+        <div class="list-group">
             {% for company in companies_list %}
-                <li><a href="{% url 'company_detail' company.id %}"> {{ company.title }}</a></li>
+                <a href="{% url 'company_detail' company.id %}" class="list-group-item list-group-item-action">{{ company.title }}</a>
             {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <h1>Пока не создано ни одной компании</h1>
     {% endif %}
-    <br>
-    <a href="{% url 'company_create' %}">Добавить компанию</a>
 {% endblock %}
